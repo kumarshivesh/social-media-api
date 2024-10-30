@@ -1,0 +1,65 @@
+# Virtual Environment
+venv/
+
+# Environment Variables
+.env
+
+# Python Artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Distribution / Packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Log Files
+*.log
+*.out
+*.err
+
+# Database Files
+*.sqlite3
+
+# IDE / Editor Specific
+.vscode/
+*.code-workspace
+.idea/
+
+# OS Generated Files
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Linux
+*~
+.directory
+
+# Exclude redundant Python files
+connecting_to_postgres.py
+crud_operations.py
+main.py
+request_body.py
+response_status_codes.py
+
