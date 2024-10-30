@@ -57,9 +57,4 @@ $RECYCLE.BIN/
 .directory
 
 # Exclude redundant Python files
-connecting_to_postgres.py
-crud_operations.py
-main.py
-request_body.py
-response_status_codes.py
-
+before_folder/
