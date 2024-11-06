@@ -1,5 +1,3 @@
-# FastAPI Dockerfile
-
 # Pull python base image
 FROM python:3.11.4-slim-buster
 
@@ -31,8 +29,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends netcat && rm -r
 # Copy entrypoint.sh
 COPY ./entrypoint.sh $APP_HOME
 
-# Remove Windows line endings and make entrypoint.sh executable
-RUN sed -i 's/\r$//g' ${APP_HOME}/entrypoint.sh && chmod +x ${APP_HOME}/entrypoint.sh
+# Ensure entrypoint.sh has executable permissions (if already not executable)
+RUN chmod +x ${APP_HOME}/entrypoint.sh
 
 # Copy project files
 COPY . $APP_HOME
