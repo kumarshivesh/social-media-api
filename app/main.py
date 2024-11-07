@@ -2,18 +2,15 @@
 # app/main.py
 import logging
 
-# Reduce logging verbosity
+# Reduce logging verbosity for SQLAlchemy engine
 logging.getLogger("sqlalchemy.engine").setLevel(logging.WARNING)
 
 from fastapi import FastAPI
-from . import models
-from .database import engine
+from app import models
+from app.database import engine
+from app.routers import post, user, auth, vote
 from typing import List
-from .routers import post, user, auth, vote
 from fastapi.middleware.cors import CORSMiddleware
-
-# Create the database tables [We don't need this line if we're using `alembic`]
-#models.Base.metadata.create_all(bind=engine)
 
 # Initialize FastAPI app
 app = FastAPI()
@@ -37,7 +34,7 @@ app.include_router(vote.router)
 
 @app.get("/")
 def root():
-  return {"message": "Hello World!"}
+    return {"message": "Hello World!"}
 
 """ 
 import logging
