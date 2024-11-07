@@ -26,14 +26,11 @@ RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
 # Install other dependencies (Debian)
 RUN apt-get update && apt-get install -y --no-install-recommends netcat curl && rm -rf /var/lib/apt/lists/*
 
-# Copy entrypoint.sh
-COPY ./entrypoint.sh $APP_HOME
-
-# Fix permissions and ownership
-RUN chown app:app ${APP_HOME}/entrypoint.sh && chmod +x ${APP_HOME}/entrypoint.sh
-
-# Copy project files
+# Copy all project files
 COPY . $APP_HOME
+
+# Set correct ownership and permissions for all files
+RUN chown -R app:app $APP_HOME && chmod +x ${APP_HOME}/entrypoint.sh
 
 # Switch to app user
 USER app
