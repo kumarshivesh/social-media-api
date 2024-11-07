@@ -1,3 +1,6 @@
+# app/Dockerfile
+# FastAPI Dockerfile
+
 # Pull python base image
 FROM python:3.11.4-slim-buster
 
@@ -24,13 +27,15 @@ COPY ./requirements.txt $APP_HOME
 RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
 
 # Install other dependencies (Debian)
-RUN apt-get update && apt-get install -y --no-install-recommends netcat && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y --no-install-recommends netcat curl && rm -rf /var/lib/apt/lists/*
 
 # Copy entrypoint.sh
 COPY ./entrypoint.sh $APP_HOME
 
-# Ensure entrypoint.sh has executable permissions (if already not executable)
-RUN chmod +x ${APP_HOME}/entrypoint.sh
+# Ensure entrypoint.sh has correct permissions
+RUN chmod +x ${APP_HOME}/entrypoint.sh \
+    && sed -i 's/\r$//' ${APP_HOME}/entrypoint.sh \
+    && ls -l ${APP_HOME}/entrypoint.sh  # Debug: verify permissions
 
 # Copy project files
 COPY . $APP_HOME
